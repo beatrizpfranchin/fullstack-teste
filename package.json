@@ -2,6 +2,6 @@
     "private": true,
     "scripts": {
       "next": "cd frontend && npm run dev",
-      "nest": "cd backend && npm run start"
+      "nest": "cd backend && npm run start:dev"
     }
 }

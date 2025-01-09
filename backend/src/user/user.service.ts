@@ -16,10 +16,25 @@ export class UserService {
     findAll() {
       return this.prismaService.user.findMany();
     }
+
+
+    findOne(id: string) {
+      if (isNaN(+id)) 
+        return this.findByEmail(id);
+      else
+        return this.findById(+id);
+    }
+
   
-    findOne(id: number) {
+    findById(id: number) {
       return this.prismaService.user.findUnique({
         where: { id },
+      });
+    }
+
+    findByEmail(email: string) {
+      return this.prismaService.user.findUnique({
+        where: { email },
       });
     }
   
