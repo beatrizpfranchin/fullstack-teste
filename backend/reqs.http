@@ -1,0 +1,26 @@
+GET http://localhost:3001/user
+
+###
+
+GET http://localhost:3001/task
+
+###
+
+POST http://localhost:3001/user
+content-Type: application/json
+
+{
+    "email": "user123@email.com",
+    "password": "123",
+    "name": "Usuário Um" 
+}
+
+###
+POST http://localhost:3001/task
+content-Type: application/json
+
+{
+    "title": "primeira tarefa",
+    "description": "esta é a primeira tarefa desse crud.",
+    "authorId": 1
+}

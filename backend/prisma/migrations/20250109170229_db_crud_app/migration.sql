@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Task" ADD COLUMN     "dateCompleted" TIMESTAMP(3),
+ADD COLUMN     "dateCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

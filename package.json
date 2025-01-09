@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-      "next": "cd nextjs-crud-app && npm run dev",
-      "nest": "cd nestjs-crud-app && npm run start"
+      "next": "cd frontend && npm run dev",
+      "nest": "cd backend && npm run start"
     }
 }
