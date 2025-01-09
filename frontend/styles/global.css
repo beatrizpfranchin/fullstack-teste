@@ -30,3 +30,21 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.flex
+{
+  display: flex;
+}
+
+.flex-col
+{
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-items: center;
+}
+
+.items-center {
+  align-items: center;
+}
