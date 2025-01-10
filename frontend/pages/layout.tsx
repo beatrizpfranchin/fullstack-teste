@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <div className={styles.container}>

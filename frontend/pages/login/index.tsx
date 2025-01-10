@@ -2,7 +2,7 @@ import Link from 'next/link';
 import RootLayout from '@/pages/layout';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
-import { apiUrl } from '@/utils/fetchApi';
+import { apiUrl, logIn } from '@/utils/apiWrapper';
 
 
 
@@ -13,15 +13,9 @@ export default function LoginPage() {
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget);
-    const response = await fetch(`${apiUrl}auth/login`,{
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Object.fromEntries(formData)),
-      mode: 'cors',
-      credentials: 'include'
-    });
+    const response = await logIn(formData);
     
-    if (await response) {
+    if (response.ok) {
       router.push('/task-list');
     }
   }

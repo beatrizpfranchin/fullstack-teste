@@ -29,8 +29,9 @@ export class AuthController {
     ) {
 
         const loggedIn = this.authService.login(req.user);
-        if (await loggedIn) {
-            response.cookie('accessToken', (await loggedIn).access_token, cookieOptions)
+        if (loggedIn != null) {
+            const token = (await loggedIn).access_token;
+            response.cookie('accessToken', token, cookieOptions)
             return loggedIn;
         }
         return null;
@@ -39,8 +40,7 @@ export class AuthController {
     @UseGuards(JwtAuthGuard)
     @Get('/logout')
     async logout(@Res({passthrough: true}) response: any) {
-       response.clearCookie('accessToken',cookieOptions);
-       response.clearCookie('currentUser',cookieOptions);
+       response.clearCookie('accessToken', cookieOptions);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -49,7 +49,6 @@ export class AuthController {
         @Request() req: any, 
         @Res({passthrough: true}) response: any
     ){
-        response.cookie('currentUser', req.user, cookieOptions)
         return req.user;
     }
 }

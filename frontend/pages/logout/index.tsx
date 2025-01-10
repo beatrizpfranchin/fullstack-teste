@@ -1,14 +1,16 @@
-import { apiUrl } from "@/utils/fetchApi";
+import { logOut } from "@/utils/apiWrapper";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function LogoutPage(){
-    useEffect(() => {
-        const response = await fetch(`${apiUrl}auth/logout`,{
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-            mode: 'cors',
-            credentials: 'include'
-        });
-    })
+    const router = useRouter();
     
+    useEffect(() => {
+        logOutAndReset();
+    },[])
+    
+    async function logOutAndReset(){
+        await logOut();
+        router.push('/login');
+    }
 }

@@ -2,14 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/db/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
   
     create(createUserDto: CreateUserDto) {
-      return this.prismaService.user.create({
-        data: createUserDto,
+      return bcrypt.hash(createUserDto.password,10).then((hash: string) => {
+        const newUser = {
+          password: hash,
+          email: createUserDto.email,
+          name: createUserDto.name
+        }
+
+        return this.prismaService.user.create({
+          data: newUser,
+        });
       });
     }
   
@@ -39,10 +48,24 @@ export class UserService {
     }
   
     update(id: number, updateUserDto: UpdateUserDto) {
-      return this.prismaService.user.update({
-        where: { id },
-        data: updateUserDto,
-      });
+      if (updateUserDto.password) {
+        return bcrypt.hash(updateUserDto.password,10).then((hash: string) => {
+          const updatedUser = {
+            password: hash,
+            email: updateUserDto.email,
+            name: updateUserDto.name
+          }
+          return this.prismaService.user.update({
+            where: { id },
+            data: updatedUser,
+          });
+        });
+      } else {
+        return this.prismaService.user.update({
+          where: { id },
+          data: UpdateUserDto,
+        });
+      }
     }
   
     remove(id: number) {
