@@ -10,10 +10,13 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     UserModule, 
-    PassportModule,
+    PassportModule.register({
+      defaultStrategy: 'jwt',
+      session: false
+    }),
     JwtModule.register({
       secret: process.env.REACT_APP_JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '10h' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

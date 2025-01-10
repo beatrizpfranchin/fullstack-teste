@@ -1,5 +1,5 @@
 import Form from 'next/form';
-import RootLayout from '../components/root-layout';
+import RootLayout from '@/pages/layout';
 
 export default function TaskPage() {
   return (

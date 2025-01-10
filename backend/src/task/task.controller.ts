@@ -22,6 +22,11 @@ export class TaskController {
     return this.taskService.findOne(+id);
   }
 
+  @Get('/user/:authorId')
+  findByAuthorId(@Param('authorId') authorId: string) {
+    return this.taskService.findByAuthorId(+authorId);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.taskService.update(+id, updateTaskDto);

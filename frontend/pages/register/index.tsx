@@ -1,7 +1,7 @@
 import Form from 'next/form';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
-import RootLayout from '../components/root-layout';
+import styles from '@/styles/Home.module.css';
+import RootLayout from '@/pages/layout';
 
 export default function RegisterPage() {
   return (

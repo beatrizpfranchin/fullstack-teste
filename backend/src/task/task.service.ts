@@ -23,6 +23,12 @@ export class TaskService {
     });
   }
 
+  findByAuthorId(authorId: number) {
+    return this.prismaService.task.findMany({
+      where: { authorId }
+    })
+  }
+
   update(id: number, updateTaskDto: UpdateTaskDto) {
     return this.prismaService.task.update({
       where: { id },
