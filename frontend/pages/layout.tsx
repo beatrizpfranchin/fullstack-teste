@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '@/styles/Home.module.css';
+import Link from 'next/link';
 
 export default function RootLayout({
   children,
@@ -15,11 +16,14 @@ export default function RootLayout({
       <h1 className={styles.title}>
           CRUDe Task Manager
       </h1>
-      <main>
+      <main className={styles.main}>
         {children}
       </main>
 
-      <footer>
+      <footer className={styles.footer}>
+        Por Beatriz Polita Franchin
+
+        <Link className={styles.logout} href='/logout'> Sair </Link>
       </footer>
     </div>
   );

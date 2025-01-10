@@ -8,7 +8,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     credentials: true, 
-    methods:['GET','POST','PUT','DELETE','OPTIONS'],
+    methods:['GET','POST','PUT','DELETE','OPTIONS','PATCH'],
     origin:['http://localhost:3000','http://localhost:3001']
   });
   app.use(cookieParser(process.env.REACT_APP_JWT_SECRET));

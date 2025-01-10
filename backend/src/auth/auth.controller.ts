@@ -15,11 +15,11 @@ const cookieOptions = {
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @Post()
-    async getUser(@Request() req: any) {
-        console.log(req.cookies);
-        return await this.authService.validateUser(req.body.username, req.body.password);
-    }
+    // @Post()
+    // async getUser(@Request() req: any) {
+    //     console.log(req.cookies);
+    //     return await this.authService.validateUser(req.body.username, req.body.password);
+    // }
 
     @UseGuards(LocalAuthGuard)
     @Post('/login')
@@ -37,7 +37,7 @@ export class AuthController {
         return null;
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get('/logout')
     async logout(@Res({passthrough: true}) response: any) {
        response.clearCookie('accessToken', cookieOptions);
