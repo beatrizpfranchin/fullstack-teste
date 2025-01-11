@@ -1,3 +1,5 @@
+//Informações para utilizar para teste caso o banco de dados não funcione
+
 export const users = [
     {
       "id": 3,

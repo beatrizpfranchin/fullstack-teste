@@ -8,6 +8,8 @@ import { deleteTaskById, getTaskById, updateTask } from '@/utils/apiWrapper';
 import styles from '@/styles/Home.module.css';
 import ModalComponent from '@/components/modal';
 
+//Página para a edição de uma tarefa existente
+
 export default function TaskPage() {
   const searchParams = useSearchParams();
   
@@ -16,6 +18,8 @@ export default function TaskPage() {
   const router = useRouter();
 
   useEffect(() => {
+    //Checa se existe um usuário autenticado que pode acessar essa página, 
+    //Senão redireciona para a página de login
     redirectIfNoAccess(router, (user) => {
       loadTaskInfo(user);
     })
@@ -23,12 +27,13 @@ export default function TaskPage() {
 
   async function loadTaskInfo(user?) {
     const taskId = await searchParams.get('id');
-    // if (+taskId < 1) router.back();
+    //Obtém o ID da tarefa que foi passado por meio da URL
     const response = await getTaskById(+taskId);
     console.log(response);
     if (response.ok) {
       const task = await response.json();
       if (user?.userId == task.authorId){
+        //O usuário só pode acessar a tarefa se ele for o autor
         console.log(task);
         setTaskInfo(task);
       }
@@ -36,6 +41,7 @@ export default function TaskPage() {
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+      //Função para enviar os dados do formulário para atualizar uma tarefa
       event.preventDefault()
    
       const formData = new FormData(event.currentTarget);
@@ -45,7 +51,10 @@ export default function TaskPage() {
         newCompleteDate = new Date(Date.now());
       } else if (newStatus != TaskStatus.COMPLETE && taskInfo.status == TaskStatus.COMPLETE) {
         newCompleteDate = null;
-      }
+      } 
+      //Caso o usuário altere o status de incompleto para completo ou vice versa, 
+      //A data de compleição da tarefa também é atualizada para refletir a mudança
+      
       const newTask : Task = {
         ...taskInfo,
         title: formData.get('title').toString(),
@@ -59,24 +68,32 @@ export default function TaskPage() {
       if (response.ok) {
         console.log(response)
         router.push('/task-list');
+        //Se a tarefa é atualizada com sucesso, volta para a página da lista de tarefas
       }
   }
 
   async function handleReset(event: FormEvent<HTMLFormElement>) {
+    //Retorna para a página anterior se o usuário clicar em Cancelar.
     router.back();
   }
   
   async function deleteTask() {
+    //Deleta a tarefa depois que o usuário confirma pelo modal.
     const response = await deleteTaskById(taskInfo.id)
-    closeModal();
-    router.back();
+    if (response.ok) {
+      //Se a tarefa é deletada com sucesso, fecha o modal e volta para a lista de tarefas
+      closeModal();
+      router.back();
+    }
   }
 
   async function openModal()  {
+    //Abre o modal
     setShowModal(true)
   }
 
   async function closeModal() {
+    //Fecha o modal
     setShowModal(false)
   }
 

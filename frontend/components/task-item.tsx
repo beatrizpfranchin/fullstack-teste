@@ -6,14 +6,14 @@ import StatusLabelComponent from './status-label';
 import { NextRouter } from 'next/router';
 import Link from 'next/link';
 
+//Componente que mostra todas as informações sobre uma tarefa compactados para aparecer em uma lista
+//Recebe o router para encaminhar para a página de edição da tarefa se o usuário clicar no botão Editar
+//E também as informações da tarefa para serem mostradas
+
 export default function TaskItemComponent(
     { props, router }:
     { props : Task, router: NextRouter }
 ) {
-
-  function editTask() {
-    router.push(`/task/${props.id}`);
-  }
 
   return (
       <div  className={styles.taskListItem}>

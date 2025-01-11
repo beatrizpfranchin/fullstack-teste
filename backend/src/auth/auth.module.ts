@@ -13,11 +13,11 @@ import { JwtStrategy } from './jwt.strategy';
     PassportModule.register({
       defaultStrategy: 'jwt',
       session: false
-    }),
+    }), //Modulo do Passport que ajuda a gerenciar as credenciais para realizar login
     JwtModule.register({
       secret: process.env.REACT_APP_JWT_SECRET,
       signOptions: { expiresIn: '10h' },
-    }),
+    }), //Modulo JWT para gerenciar autenticação. Recebe o segredo que está na variável .env
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController]

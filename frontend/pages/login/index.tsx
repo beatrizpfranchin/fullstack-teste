@@ -5,12 +5,13 @@ import { FormEvent } from 'react';
 import { apiUrl, logIn } from '@/utils/apiWrapper';
 import styles from '@/styles/Home.module.css';
 
-
+//Página de login
 
 export default function LoginPage() {
   const router = useRouter()
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    //Função para enviar as informações do form e realizar o login
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget);
@@ -18,6 +19,7 @@ export default function LoginPage() {
     
     if (response.ok) {
       router.push('/task-list');
+      //Se o login tiver sucesso o usuário é redirecionado para a página com a lista de tarefas
     }
   }
 
@@ -39,7 +41,6 @@ export default function LoginPage() {
             </div>
             <div className={styles.formItem}>
               <Link href="/register">Cadastre-se</Link>
-              {/* <Link>Esqueceu a senha?</Link> */}
             </div>
         </form>
       </div>

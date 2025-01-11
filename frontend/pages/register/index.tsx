@@ -6,10 +6,13 @@ import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 import { logIn, signUp } from '@/utils/apiWrapper';
 
+//Página para cadastro de um novo usuário
+
 export default function RegisterPage() {
   const router = useRouter()
   
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    //Função para enviar os dados do formulário para criar um novo usuário
     event.preventDefault()
     
     const formData = new FormData(event.currentTarget);
@@ -17,8 +20,10 @@ export default function RegisterPage() {
     
     if (response.ok) {
       const loginResponse = await logIn(formData)
+      //Se o usuário é criado com sucesso, realiza o login
       if (loginResponse.ok) {
         router.push('/task-list')
+        //Se o login tiver sucesso o usuário é redirecionado para a página com a lista de tarefas
       }
     }
   }
@@ -41,7 +46,6 @@ export default function RegisterPage() {
           </div>
           <div className={styles.formItem}>
               <Link href="/login">Já tem uma conta? Faça LogIn</Link>
-              {/* <Link>Esqueceu a senha?</Link> */}
             </div>
         </form>
       </div>

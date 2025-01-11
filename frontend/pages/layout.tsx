@@ -2,6 +2,8 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import Link from 'next/link';
 
+//Layout comum a todas as páginas do app
+
 export default function RootLayout({
   children,
 }: {

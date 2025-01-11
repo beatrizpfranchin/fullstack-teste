@@ -6,17 +6,22 @@ import { useRouter } from 'next/router';
 import { newTask } from '@/utils/apiWrapper';
 import styles from '@/styles/Home.module.css';
 
+//Página para a criação de uma nova tarefa
+
 export default function NewTaskPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
+    //Checa se existe um usuário autenticado que pode acessar essa página, 
+    //Senão redireciona para a página de login
     redirectIfNoAccess(router, (user) => {
       setUser(user)
     })
   },[])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+      //Função para enviar os dados do formulário e criar uma nova tarefa
       event.preventDefault()
    
       const formData = new FormData(event.currentTarget);
@@ -27,12 +32,13 @@ export default function NewTaskPage() {
       const response = await newTask(task);
       
       if (response.ok) {
-        console.log(response)
         router.push('/task-list');
+        //Se a tarefa for criada com sucesso o usuário é redirecionado para a página com a lista de tarefas
       }
   }
 
   async function handleReset(event: FormEvent<HTMLFormElement>) {
+    //Volta para a página anterior quando o usuário clica no botão cancelar
     router.back();
   }
 

@@ -7,6 +7,8 @@ import styles from '@/styles/Home.module.css';
 import { redirectIfNoAccess } from '@/utils/routes';
 import { useRouter } from 'next/router';
 
+//Página que lista todas as tarefas de um usuário logado
+
 export default function TaskListPage() {
   const router = useRouter();
 
@@ -14,6 +16,8 @@ export default function TaskListPage() {
   const [userTasks, setTasks] = useState<any>([]);
 
   useEffect(() => {
+    //Checa se existe um usuário autenticado que pode acessar essa página, 
+    //Senão redireciona para a página de login
     redirectIfNoAccess(router,(user) => {
       setUser(user);
       getTasks(user?.userId);
@@ -21,6 +25,7 @@ export default function TaskListPage() {
   }, []);
 
   async function getTasks(userId: number) {
+    //Obtém as tarefas relacionadas ao ID de um usuário
     const response = await getUserTasks(userId);
     if (response.ok) {
       const tasks = await response.json();
@@ -30,6 +35,7 @@ export default function TaskListPage() {
   }
 
   async function newTask() {
+    //Vai para a página de criação de nova tarefa
     router.push('/task/new')
   }
 

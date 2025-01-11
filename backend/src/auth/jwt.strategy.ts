@@ -4,7 +4,7 @@ import { Injectable, Req } from '@nestjs/common';
 import { Request } from 'express';
 
 const extractJwtFromCookies = (req: Request) => {
-  console.log("extractJwt", req.cookies);
+  //Função para extrair o token de acesso dos cookies, se existir
   if (req.cookies && 
       'accessToken' in req.cookies && 
       req.cookies.accessToken.length > 0) {
@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromExtractors([
         extractJwtFromCookies, 
         ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ]),
+      ]), //Autorização JWT pode ser extraida do header da requisição ou dos cookies
       ignoreExpiration: false,
       secretOrKey: process.env.REACT_APP_JWT_SECRET,
     });

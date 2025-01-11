@@ -1,16 +1,11 @@
 import { Task } from "@/models/task";
 
+//Biblioteca de funções relacionadas a chamadas para a API REST
+
 export const apiUrl = "http://localhost:3001/";
 
-export const cookieOptions = {
-    expires: new Date(Date.now() + 3600000),
-    httpOnly: true,
-    path: '/',
-    sameSite: 'none',
-    secure: true
-}
-
 export async function isUserLoggedIn() {
+    //Checa se há um usuário logado
     const response = await fetch(`${apiUrl}auth/profile`,{
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -21,6 +16,7 @@ export async function isUserLoggedIn() {
 }
 
 export async function logIn(formData: FormData){
+    //Faz o login
     const response = await fetch(`${apiUrl}auth/login`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,6 +28,7 @@ export async function logIn(formData: FormData){
 }
 
 export async function signUp(formData: FormData){
+    //Cadastra um novo usuário
     const response = await fetch(`${apiUrl}user`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +40,7 @@ export async function signUp(formData: FormData){
 }
 
 export async function logOut() {
+    //Faz o logout
     const response = await fetch(`${apiUrl}auth/logout`,{
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -53,6 +51,7 @@ export async function logOut() {
 }
 
 export async function getUserTasks( userId: number ) {
+    //Obtém as as tarefas de um usuário
     const response = await fetch(`${apiUrl}task/user/${userId}`,{
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -63,6 +62,7 @@ export async function getUserTasks( userId: number ) {
 }
 
 export async function getTaskById( taskId: number) {
+    //Obtém tarefa por meio do ID
     const response = await fetch(`${apiUrl}task/${taskId}`,{
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -73,6 +73,7 @@ export async function getTaskById( taskId: number) {
 }
 
 export async function updateTask( taskId, task: Task) {
+    //Atualiza uma tarefa
     const response = await fetch(`${apiUrl}task/${taskId}`,{
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -84,6 +85,7 @@ export async function updateTask( taskId, task: Task) {
 }
 
 export async function newTask(task: {}){
+    //Cria uma nova tarefa
     const response = await fetch(`${apiUrl}task`,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,6 +97,7 @@ export async function newTask(task: {}){
 }
 
 export async function deleteTaskById(id: number){
+    //Deleta uma tarefa
     const response = await fetch(`${apiUrl}task/${id}`,{
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
