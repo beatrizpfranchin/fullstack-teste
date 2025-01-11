@@ -1,7 +1,5 @@
-# Teste Leek Soluções: Vaga Desenvolvedor Fullstack Pleno
-
-## CRUDe Task Manager por Beatriz Polita Franchin
-
+# CRUDe Task Manager por Beatriz Polita Franchin
+*Teste Leek Soluções: Vaga Desenvolvedor Fullstack Pleno*
 
 ## Instruções para a execução
 
@@ -9,9 +7,7 @@
 
    1. Ative o serviço local do **PostgreSql** na sua máquina.
    
-   *Porta*: 5432
-   *Usuário*: postgres
-   *Senha*: **sem senha**
+   *Porta*: 5432 | *Usuário*: postgres | *Senha*: **sem senha**
 
    2. Crie o banco de dados db-crud-app
 
@@ -35,6 +31,6 @@
 
 p.s.: O arquivo .env no back-end foi incluido pois tem as informações de conexão com o PostgreSql para o Prisma e também o segredo usado na autenticação JWT. Isso é apenas para a execução deste teste e não é uma boa prática no geral.
 
-# Qualquer dúvida, estou a disposição!
+**Qualquer dúvida, estou a disposição!**
 
 # Muito obrigada por esta oportunidade!
